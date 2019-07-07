@@ -1,5 +1,5 @@
 /* pages/posts/posts.wxss */
-
+@import 'post-item/post-item-template.wxss';
 swiper {
   width: 100%;
   height: 600rpx;
@@ -10,62 +10,3 @@ swiper image {
   height: 600rpx;
 }
 
-.post-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 20rpx;
-  margin-bottom: 40rpx;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
-  background-color: #fff;
-  padding-bottom: 10rpx;
-}
-.post-author-date{
-  display: flex;
-  /* flex-direction: row; */
-  align-items: center;
-  margin: 10rpx 0 20rpx 10rpx;
-}
-.post-author{
-  width: 60rpx;
-  height: 60rpx;
-  /* vertical-align: middle; */
-}
-.post-date{
-  margin-left: 10rpx;
-  /* vertical-align: middle; */
-  font-size: 26rpx;
-}
-.post-title{
-  font-size: 34rpx;
-  font-weight: 600;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  color: #333;
-}
-.post-img{
-  width: 100%;
-  height: 360rpx;
-  margin-bottom: 20rpx;
-}
-.post-content{
-  font-size: 28rpx;
-  color: #ccc;
-  letter-spacing: 2rpx;
-  margin-left: 16px;
-  margin-bottom: 20rpx;
-}
-.post-like{
-  display: flex;
-  align-items: center;
-  font-size: 26rpx;
-  margin-left: 20rpx;
-}
-.post-like-img{
-  width: 32rpx;
-  height: 32rpx;
-  margin-right: 16rpx;
-}
-.post-like-font{
-  margin-right: 30rpx;
-}

@@ -3,7 +3,6 @@
     "pages/posts/posts",
     "pages/index/index",
     "pages/home/home"
-   
   ],
   "window": {
     "backgroundTextStyle": "light",
