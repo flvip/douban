@@ -1,0 +1,17 @@
+/* pages/movies/movie/movie-template.wxss */
+@import '../stars/stars.wxss';
+.movie-container{
+  display: flex;
+  flex-direction: column;
+  padding: 0 24rpx;
+}
+.movie-img{
+  width: 200rpx;
+  height: 270rpx;
+  padding-bottom: 20rpx;
+}
+.movie-title{
+  font-size: 26rpx;
+  margin-bottom: 16rpx;
+  
+}

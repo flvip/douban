@@ -2,20 +2,22 @@
 <!-->轮播图区域
 <-->
   <view>
-    <swiper indicator-dots='true' indicator-color="#fff" indicator-active-color="#000" autoplay>
-      <swiper-item>
-        <image src='/images/wx.png'></image>
+    <swiper indicator-dots='true' indicator-color="#fff" indicator-active-color="#000" autoplay catchtap='onSwiperTap'>
+      <swiper-item >
+        <image src='/images/wx.png' data-postId="3"></image>
       </swiper-item>
       <swiper-item>
-        <image src='/images/vr.png'></image>
+        <image src='/images/vr.png' data-postId="4"></image>
       </swiper-item>
       <swiper-item>
-        <image src='/images/iqiyi.png'></image>
+        <image src='/images/iqiyi.png' data-postId="5"></image>
       </swiper-item>
     </swiper>
   </view>
   <!-->内容区域<-->
 
     <block wx:for="{{post_keys}}" wx:for-item="item" wx:key="item.postId">
-      <template is="postItem" data="{{item}}" />
+    <view catchtap="onPostTap" data-postId='{{item.postId}}'>
+      <template is="postItem" data="{{...item}}"  />
+      </view>
     </block>
