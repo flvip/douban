@@ -1,4 +1,3 @@
-// pages/movies/movies.js
 var util =require('../../utils/util.js')
 var app = getApp()
 Page({
@@ -9,7 +8,11 @@ Page({
   data: {
     inTheaters:{},
     comingSoon:{},
-    top250:{}
+    top250:{},
+    searchResult:{},
+    containerShow:true,
+    searchPanelShow:false,
+    dafaultValue:""
   },
 
   /**
@@ -75,6 +78,25 @@ Page({
     wx.navigateTo({
       url: 'more-movies/more-movies?category=' + category,
     })
+  },
+  onCancelImgTap:function(event){
+    this.setData({
+      containerShow: true,
+      searchPanelShow: false,
+      dafaultValue:""
+    })
+  this.data.searchResult={}
+  },
+  onBindFoucs:function(event){
+    this.setData({
+      containerShow:false,
+      searchPanelShow:true
+    })
+  },
+  onBindBlur:function(event){
+    var text = event.detail.value
+    var searchUrl = app.globalData.g_doubanBase + "/v2/movie/search?q="+text
+    this.getMovieListData(searchUrl,"searchResult","")
   }
  
 })

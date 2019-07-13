@@ -1,4 +1,3 @@
-// pages/posts/posts.js
 var postsData = require('../../data/posts-data.js')
 Page({
 
