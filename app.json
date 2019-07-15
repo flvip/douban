@@ -3,7 +3,8 @@
     "pages/movies/movies",
     "pages/posts/posts",
     "pages/posts/post-detail/post-detail",
-    "pages/movies/more-movies/more-movies"
+    "pages/movies/more-movies/more-movies",
+    "pages/movies/movie-detail/movie-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

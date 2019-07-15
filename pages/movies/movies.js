@@ -1,4 +1,4 @@
-var util =require('../../utils/util.js')
+var util = require('../../utils/util.js')
 var app = getApp()
 Page({
 
@@ -6,97 +6,101 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inTheaters:{},
-    comingSoon:{},
-    top250:{},
-    searchResult:{},
-    containerShow:true,
-    searchPanelShow:false,
-    dafaultValue:""
+    inTheaters: {},
+    comingSoon: {},
+    top250: {},
+    searchResult: {},
+    containerShow: true,
+    searchPanelShow: false,
+    dafaultValue: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var inTheatersUrl = app.globalData.g_doubanBase + "/v2/movie/in_theaters" + "?start=0&count=3"
     // console.log(inTheatersUrl)
     var comingSoonUrl = app.globalData.g_doubanBase + "/v2/movie/coming_soon" + "?start=0&count=3"
     var top250Url = app.globalData.g_doubanBase + "/v2/movie/top250" + "?start=0&count=3"
 
-    this.getMovieListData(inTheatersUrl,'inTheaters','正在热映')
-    this.getMovieListData(comingSoonUrl,'comingSoon','即将上映')
-    this.getMovieListData(top250Url,'top250','top250')
+    this.getMovieListData(inTheatersUrl, 'inTheaters', '正在热映')
+    this.getMovieListData(comingSoonUrl, 'comingSoon', '即将上映')
+    this.getMovieListData(top250Url, 'top250', 'top250')
   },
   getMovieListData: function (url, settedKey, categoryTitle) {
-    var that =this
+    var that = this
     wx.request({
       url: url,
       method: 'get',
       header: {
         "Content-Type": "application/json"
       },
-      success: function(res) {
+      success: function (res) {
         that.processDoubanData(res.data, settedKey, categoryTitle)
-        console.log(res)
       },
-      fail: function(error) {
+      fail: function (error) {
         console.log(error)
       }
     })
- 
+
   },
   //过滤数据的方法
-  processDoubanData: function (moviesDouban, settedKey ,categoryTitle){
-    var movies=[]
-    for(let i in moviesDouban.subjects){
+  processDoubanData: function (moviesDouban, settedKey, categoryTitle) {
+    var movies = []
+    for (let i in moviesDouban.subjects) {
       var subjects = moviesDouban.subjects[i]
       var title = subjects.title
-      if(title.length>=6){
-        title=title.substring(0,6)+"..."
+      if (title.length >= 6) {
+        title = title.substring(0, 6) + "..."
       }
-      var temp={
+      var temp = {
         stars: util.convertToStarsArray(subjects.rating.stars),
-        title:title,
+        title: title,
         average: subjects.rating.average,
         coverageUrl: subjects.images.large,
         movieId: subjects.id
       }
       movies.push(temp)
     }
-    var readyData={}
+    var readyData = {}
     readyData[settedKey] = {
       categoryTitle: categoryTitle,
-      movies:movies
+      movies: movies
     }
-  
+
     this.setData(readyData)
   },
-  onMoreTap:function(event){
+  onMoreTap: function (event) {
     var category = event.currentTarget.dataset.category
-    console.log(category)
     wx.navigateTo({
       url: 'more-movies/more-movies?category=' + category,
     })
   },
-  onCancelImgTap:function(event){
+  onMovieDetailTap: function (event) {
+    var movieId = event.currentTarget.dataset.movieid
+    wx.navigateTo({
+      url: 'movie-detail/movie-detail?id=' + movieId,
+    })
+  },
+  onCancelImgTap: function (event) {
     this.setData({
       containerShow: true,
       searchPanelShow: false,
-      dafaultValue:""
+      dafaultValue: ""
     })
-  this.data.searchResult={}
+    this.data.searchResult = {}
   },
-  onBindFoucs:function(event){
+  onBindFoucs: function (event) {
     this.setData({
-      containerShow:false,
-      searchPanelShow:true
+      containerShow: false,
+      searchPanelShow: true
     })
   },
-  onBindBlur:function(event){
+  onBindBlur: function (event) {
     var text = event.detail.value
-    var searchUrl = app.globalData.g_doubanBase + "/v2/movie/search?q="+text
-    this.getMovieListData(searchUrl,"searchResult","")
+    var searchUrl = app.globalData.g_doubanBase + "/v2/movie/search?q=" + text
+    this.getMovieListData(searchUrl, "searchResult", "")
   }
- 
+
 })

@@ -1,0 +1,55 @@
+<import src="../stars/stars.wxml" />
+<view class='container'>
+  <image class='head-img' src='{{movies.movieImg}}' mode="aspectFill" ></image>
+  <view class='head-img-hover' catchtap='viewMoviePostImg' data-src="{{movies.movieImg}}">
+    <text class='main-title'>{{movies.original_title}}</text>
+    <text class='sub-title'>{{movies.country + "." +movies.year}}</text>
+    <view class='like'>
+
+      <text class='highlight-font'>{{movies.wish_count}}</text>
+      <text class='plain-font'>人喜欢</text>
+      <text class='highlight-font'>{{movies.comments_count}}</text>
+      <text class='plain-font'>条评论</text>
+    </view>
+  </view>
+  <image class='movie-img' src='{{movies.movieImg}}' catchtap='viewMoviePostImg' data-src="{{movies.movieImg}}"></image>
+  <view class='summary'>
+    <view class='original-title'>
+      <text>{{movies.original_title}}</text>
+    </view>
+    <view class='flex-row'>
+      <text class='mark'>评分</text>
+      <template is="starsTemplate" data="{{stars:movies.stars,score:movies.score}}" />
+    </view>
+    <view class='flex-row'>
+      <text class='mark'>导演</text>
+      <text>{{movies.director.name}}</text>
+    </view>
+    <view class='flex-row'>
+      <text class='mark'>影人</text>
+      <text>{{movies.casts}}</text>
+    </view>
+    <view class='flex-row'>
+      <text class='mark'>类型</text>
+      <text>{{movies.genres}}</text>
+    </view>
+  </view>
+  <view class='hr'></view>
+  <view class='synopsis'>
+    <text>剧情简介</text>
+    <text class='summary-content'>{{movies.summary}}</text>
+
+  </view>
+  <view class='hr'></view>
+  <view class='cast'>
+    <text class='cast-font'>影人</text>
+    <scroll-view class='cast-imgs' scroll-x="true">
+      <block wx:for="{{movies.castInfo}}" wx:for-item="item">
+        <view class='cast-container'>
+          <image class='cast-img' src='{{item.image}}'></image>
+          <text class='cast-name'>{{item.name}}</text>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
